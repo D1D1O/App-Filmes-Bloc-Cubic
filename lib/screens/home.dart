@@ -36,15 +36,17 @@ class _HomeState extends State<Home> {
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
-              const GenreFilter(),
-              BlocBuilder<HomeCubit,HomeStates>(
+               GenreFilter(homeCubit: homeCubit),
+              BlocBuilder<HomeCubit, HomeStates>(
                 bloc: homeCubit,
-                builder: (context, state){
-                  if(state is HomeLoading){
-                    return SliverFillRemaining(child: Center(child:CircularProgressIndicator()));
-                  }else if(state is HomeSuccess){
+                builder: (context, state) {
+                  if (state is HomeLoading) {
+                    return SliverFillRemaining(
+                        child: Center(child: CircularProgressIndicator()));
+                  } else if (state is HomeSuccess) {
                     return SliverGrid.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 16,
                         mainAxisExtent: 240,
@@ -54,17 +56,41 @@ class _HomeState extends State<Home> {
                       },
                       itemCount: state.movies.length,
                     );
-                  }else if (state is HomeError){
-                    return SliverFillRemaining(child: Column(
+                  } else if (state is HomeError) {
+                    return SliverFillRemaining(
+                        child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.not_interested, size: 30,),
-                        const SizedBox(height: 16,),
+                        const Icon(
+                          Icons.not_interested,
+                          size: 30,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
                         Text(state.error)
                       ],
                     ));
+                  } else if (state is HomeNoDataFound) {
+                    return SliverFillRemaining(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.not_interested,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text('Não existem filmes na categoria escolhida!')
+                        ],
+                      ),
+                    );
                   }
-                  return SliverToBoxAdapter(child: Container(),);
+                  return SliverToBoxAdapter(
+                    child: Container(),
+                  );
                 },
               ),
             ],

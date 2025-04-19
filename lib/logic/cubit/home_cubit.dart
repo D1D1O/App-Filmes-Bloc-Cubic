@@ -12,9 +12,24 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeLoading());
     try {
       final movies = await homeService.fetchMovies();
-      emit(HomeSuccess(movies));
+
+      movies.length > 0 ? emit(HomeSuccess(movies)) : emit(HomeNoDataFound());
+
     } catch (e) {
       emit(HomeError(e.toString()));
     }
   }
+
+  Future<void> findMovies(String genre) async {
+    emit(HomeLoading());
+    try{
+      final movies = await homeService.fetchMoviesByGenre(genre);
+      movies.length > 0 ? emit(HomeSuccess(movies)) : emit(HomeNoDataFound());
+    }catch(e){
+      emit(HomeError(e.toString()));
+    }
+  }
+
+
+
 }
