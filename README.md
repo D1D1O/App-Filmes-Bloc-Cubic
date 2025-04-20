@@ -1,3 +1,10 @@
+
+# Flutter: aplicando BLoC com Cubit
+
+
+![App-Filmes-Bloc-Cubic-2](https://github.com/user-attachments/assets/bbcd5c19-2616-4d26-85ff-054bd8b7b05d)
+
+
 ![Mobile-Aplicando BLoC com Cubit](https://github.com/alura-cursos/3033-bloc-com-cubit/assets/22684176/a1b98f40-085b-4a5c-ab7d-757bda996730)
 
 # Flutter: aplicando BLoC com Cubit
